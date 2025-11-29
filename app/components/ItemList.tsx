@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import type { Item } from "./MockData";
 import { LinearGradient } from "expo-linear-gradient";
 import { colors } from "./Color";
+import {useOrderStore} from "../store/index";
+import { useOrderWishStore } from "../store/indexWishStore";
 
 type ItemListProps = {
   item: Item;
@@ -11,8 +13,25 @@ type ItemListProps = {
 };
 
 const ItemComponent = ({ item, togglePizzaSize }: ItemListProps) => {
+  const setOrdersWish = useOrderWishStore((state) => state.setOrdersWish);
+  const liked = useOrderWishStore((state) => 
+    state.orders.some(
+      (order) => order.id === item.id && order.selectedSize === item.selectedSize
+    )
+  ); 
+
+  const handleLike = () => {
+    setOrdersWish(item);
+  };
   const currentPrice = item.selectedSize === 32 ? item.newPrice : item.size42;
   const currentWeight = item.selectedSize === 32 ? item.weight32 : item.weight42;
+  const addOrder = useOrderStore((state) => state.setOrders);
+  const getPriceForSize = useOrderStore((state) => state.getPriceForSize);
+
+  const onItemBuy = (pressedItem: Item) => {
+    const priceForSize = getPriceForSize(pressedItem);
+    addOrder({...pressedItem, price: priceForSize});
+  };
 
   return (
     <TouchableOpacity style={styles.container}>
@@ -40,17 +59,22 @@ const ItemComponent = ({ item, togglePizzaSize }: ItemListProps) => {
           <View style={styles.content}>
             <View style={styles.topRow}>
               <Text style={styles.title}>{item.title}</Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={handleLike}>
+                
                 <Image
-                  source={require("../../assets/images/pizzaScreen/icon-like.png")}
-                  style={styles.likeIcon}
-                />
-              </TouchableOpacity>
+                source={
+                  liked  
+                    ? require("../../assets/images/header/icon-like.png") 
+                    : require("../../assets/images/pizzaScreen/icon-like.png")
+                }
+                style={styles.likeIcon}
+              />
+            </TouchableOpacity>
             </View>
 
             <View style={styles.priceRow}>
               <Text style={styles.price}>{currentPrice}</Text>
-              <TouchableOpacity style={styles.orderButton}>
+              <TouchableOpacity style={styles.orderButton} onPress={() => onItemBuy(item)}>
                 <Text style={styles.orderButtonText}>Order</Text>
               </TouchableOpacity>
             </View>
