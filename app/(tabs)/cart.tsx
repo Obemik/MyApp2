@@ -5,8 +5,6 @@ import { Ionicons } from "@expo/vector-icons";
 import {useOrderStore} from "../store/index"
 import { SafeAreaView } from "react-native-safe-area-context";
 
-
-
 const BasketScreen =()=>{
 const orders= useOrderStore((state)=> state.orders)
 const clearOrders= useOrderStore((state)=> state.clearOrders)
@@ -16,9 +14,28 @@ const increaseQuantity=useOrderStore((state)=> state.increaseQuantity)
 const decreaseQuantity=useOrderStore((state)=> state.decreaseQuantity)
 const totalItems=useOrderStore((state)=> state.totalItems)
 const getPriceForSize=useOrderStore((state)=> state.getPriceForSize)
+const calculateTotal=useOrderStore((state)=> state.calculateTotal)
 const[confirmationMessage, setConfirmationMessage]= useState("")
-// const totals= useOrderStore((state)=> state.calculateTotal())
+const totals= calculateTotal()
 
+const onPress=()=> {
+  clearOrders();
+  setConfirmationMessage("Order successfully cleared!");
+  setTimeout(() => {
+    setConfirmationMessage("");
+  }, 2000);
+}
+
+const onItemRemove=(item)=>{
+  removeOrder(item);
+}
+const onConfirmOrder=()=>{
+  confirmOrder();
+  setConfirmationMessage("Order successfully sent!");
+  setTimeout(() => {
+    setConfirmationMessage("");
+  }, 2000);
+}
 
 const renderItem=({item})=>(
   <View style={styles.item}>
@@ -27,7 +44,7 @@ const renderItem=({item})=>(
     </View>
     <View style={styles.wrapRight}>
       <View  style={styles.wrapTitle}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=> onItemRemove(item)}>
           <Ionicons name="close-circle" size={20} color={colors.title}/>
         </TouchableOpacity>
       </View>
@@ -35,9 +52,7 @@ const renderItem=({item})=>(
         <View style={styles.priceText}>
           <Text style={styles.titlePrice}>Price:</Text>
           <Text style={styles.price}>{getPriceForSize(item).pricePizza}</Text>
-
         </View>
-
       </View>
       <View style={styles.quantityContainer}>
          <TouchableOpacity onPress={()=> increaseQuantity(item)}>
@@ -49,14 +64,13 @@ const renderItem=({item})=>(
         </TouchableOpacity>
       </View>
     </View>
-
   </View>
 )
 
 return(
   <SafeAreaView style={styles.container}>
     <View style={styles.titleContainer}>
-      <Text style={styles.titleClear}>Clear</Text>
+      <Text style={styles.titleClear} onPress={onPress}>Clear</Text>
       <Text  style={styles.titleOrders}>{`In yor basket:${totalItems} items`}</Text>
     </View>
     <FlatList
@@ -69,16 +83,70 @@ return(
         <Image style={styles.iconCart} source={require("../../assets/images/homeScreen/icon-basket.png")}/>
       )}
     </View>
-    
-
+    {orders.length>0 &&(
+      <View style={styles.totalContainer}>
+        <View style={styles.wrapTotal}>
+          <View style={styles.wrapTotalTitle}>
+            <Text style={styles.totalTitle}>Total: </Text>
+            <Text style={styles.totalPrice}>{totals.totalAmount}</Text>
+          </View>
+          <TouchableOpacity style={styles.confirmButton} onPress={onConfirmOrder}>
+            <Text style={styles.wrapTotal}>Confirm Order</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    )}
+    {confirmationMessage && (
+      <View style={styles.conformationMessageContainer}>
+        <Text style={styles.conformationMessageText}>{confirmationMessage}</Text>
+      </View>
+    )}
   </SafeAreaView>
 )
 }
+
 const styles= StyleSheet.create({
+  conformationMessageContainer:{
+    marginBottom:40,
+    padding:10,
+    backgroundColor: "lightgreen",
+    borderRadius:8,
+    alignItems:"center"
+  },
+  conformationMessageText:{
+    color:colors.newPriceColor,
+    fontSize:16
+  },
+  totalContainer:{
+    margin:10,
+  },
+  wrapTotal:{
+    flexDirection:"row",
+    justifyContent:"space-between"
+  },
+  wrapTotalTitle:{
+    flexDirection:"row",
+    alignItems:"center",
+  },
+  totalTitle:{
+    fontSize:18,
+    color:colors.title
+  },
+  totalPrice:{
+    fontSize:18,
+    fontWeight:"bold",
+    color:colors.green
+  },
+  confirmButton:{
+    backgroundColor:colors.green,
+    padding:14,
+    borderRadius:8,
+    marginTop:10,
+    alignItems:"center"
+  },
   container:{
     flex:1,
     backgroundColor:colors.mainBackground
-
   },
   titleContainer:{
     marginHorizontal:30,
@@ -88,14 +156,12 @@ const styles= StyleSheet.create({
     fontSize:18,
     marginLeft:"auto",
     color:colors.green
-
   },
   titleOrders:{
    fontSize:18,
    fontWeight:"bold",
    color:colors.textColor
   },
-
 item:{
   backgroundColor:colors.itemBackground,
   margin:10,
@@ -158,12 +224,11 @@ titlePrice:{
   flex:70,
   justifyContent:"center",
   alignItems:"center",
-
  },
  iconCart:{
   width:91,
   height:91
  }
-
 })
+
 export default BasketScreen

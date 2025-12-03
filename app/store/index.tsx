@@ -80,5 +80,28 @@ export const useOrderStore = create<OrderState>((set, get) => ({
             return item;
         })
     })),
+    calculateTotal: () => {
+    const orders = get().orders;
+    let totalAmount = 0;
+    let totalDiscount = 0;
+
+    orders.forEach((item) => {
+      const { pricePizza } = get().getPriceForSize(item);
+      const quantity = item.quantity || 1;
+      const itemTotal = pricePizza * quantity;
+      totalAmount += itemTotal;
+
+      if (item.oldPrice) {
+        const oldPriceValue = parsePrice(item.oldPrice);
+        const discount = (oldPriceValue - pricePizza) * quantity;
+        totalDiscount += discount;
+      }
+    });
+
+    return {
+      totalAmount: `$${totalAmount.toFixed(2)}`,
+      totalDiscount: `$${totalDiscount.toFixed(2)}`
+    };
+  },
 }));
 export default useOrderStore;
