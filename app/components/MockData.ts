@@ -328,151 +328,151 @@ export const mockMeats = [
 ]
 
 
-// export const mockCheese = [
-//   {
-//     id: '14',
-//     title: ' Feta',
-//     image: require('../../assets/images/pizzaToppings/cheese/feta.jpg'),
-//     price: '$1.20',
-//     weight:'50 g'
-//   },
-//   {
-//     id: '15',
-//     title: 'Blue-cheese',
-//     image: require('../../assets/images/pizzaToppings/cheese/blue-cheese.jpg'),
-//     price: '$1.99',
-//     weight:'50 g'
-//   },
-//   {
-//     id: '16',
-//     title: 'Mozzarella',
-//     image: require('../../assets/images/pizzaToppings/cheese/mozzarella.jpg'),
-//     price: '$1.30',
-//     weight:'50 g'
-//   },
-//   {
-//     id: '17',
-//     title: 'Parmesan ',
-//     image: require('../../assets/images/pizzaToppings/cheese/parmesan.jpg'),
-//     price: '$1.99',
-//     weight:'50 g'
-//   },
-//   {
-//     id: '18',
-//     title: ' Maasdam',
-//     image: require('../../assets/images/pizzaToppings/cheese/maasdam.jpg'),
-//     price: '$1.80',
-//     weight:'50 g'
-//   },
-//   {
-//     id: '19',
-//     title: 'Feta-greek ',
-//     image: require('../../assets/images/pizzaToppings/cheese/feta-greek.jpg'),
-//     price: '$1.15',
-//     weight:'50 g'
-//   },
+export const mockCheese = [
+  {
+    id: '14',
+    title: ' Feta',
+    image: require('../../assets/images/pizzaToppings/cheese/feta.jpg'),
+    price: '$1.20',
+    weight:'50 g'
+  },
+  {
+    id: '15',
+    title: 'Blue-cheese',
+    image: require('../../assets/images/pizzaToppings/cheese/blue-cheese.jpg'),
+    price: '$1.99',
+    weight:'50 g'
+  },
+  {
+    id: '16',
+    title: 'Mozzarella',
+    image: require('../../assets/images/pizzaToppings/cheese/mozzarella.jpg'),
+    price: '$1.30',
+    weight:'50 g'
+  },
+  {
+    id: '17',
+    title: 'Parmesan ',
+    image: require('../../assets/images/pizzaToppings/cheese/parmesan.jpg'),
+    price: '$1.99',
+    weight:'50 g'
+  },
+  {
+    id: '18',
+    title: ' Maasdam',
+    image: require('../../assets/images/pizzaToppings/cheese/maasdam.jpg'),
+    price: '$1.80',
+    weight:'50 g'
+  },
+  {
+    id: '19',
+    title: 'Feta-greek ',
+    image: require('../../assets/images/pizzaToppings/cheese/feta-greek.jpg'),
+    price: '$1.15',
+    weight:'50 g'
+  },
 
-// ]
+]
 
-// export const mockFish = [
-//   {
-//     id: '20',
-//     title: ' Salmon',
-//     image: require('../../assets/images/pizzaToppings/fish/salmon.jpg'),
-//     price: '$2.35',
-//     weight:'50 g'
-//   },
-//   {
-//     id: '21',
-//     title: 'Shrimps',
-//     image: require('../../assets/images/pizzaToppings/fish/shrimps.jpg'),
-//     price: '$2.50',
-//     weight:'50 g'
-//   },
-//   {
-//     id: '22',
-//     title: ' Crab-stick',
-//     image: require('../../assets/images/pizzaToppings/fish/crab-stick.jpg'),
-//     price: '$2.15',
-//     weight:'50 g'
-//   },
+export const mockFish = [
+  {
+    id: '20',
+    title: ' Salmon',
+    image: require('../../assets/images/pizzaToppings/fish/salmon.jpg'),
+    price: '$2.35',
+    weight:'50 g'
+  },
+  {
+    id: '21',
+    title: 'Shrimps',
+    image: require('../../assets/images/pizzaToppings/fish/shrimps.jpg'),
+    price: '$2.50',
+    weight:'50 g'
+  },
+  {
+    id: '22',
+    title: ' Crab-stick',
+    image: require('../../assets/images/pizzaToppings/fish/crab-stick.jpg'),
+    price: '$2.15',
+    weight:'50 g'
+  },
 
-// ]
+]
 
-// export const mockDrinks = [
-//   {
-//     id: '23',
-//     type: 'drink',
-//     title: ' Pepsi',
-//     image: require('../../assets/images/drinkScreen/pepsi.jpg'),
-//     price: '$2.35',
-//     volume:'1 l'
-//   },
-//   {
-//     id: '24',
-//     title: 'Redbull',
-//     type: 'drink',
-//     image: require('../../assets/images/drinkScreen/redbull.jpg'),
-//     price: '$2.50',
-//     volume:'0.5 l'
-//   },
-//   {
-//     id: '25',
-//     title: ' Schweppes tangerine',
-//     type: 'drink',
-//     image: require('../../assets/images/drinkScreen/schweppes.jpg'),
-//     price: '$2.15',
-//     volume:'0.33 l'
-//   },
-//   {
-//     id: '26',
-//     title: ' Schweppes lemon',
-//     type: 'drink',
-//     image: require('../../assets/images/drinkScreen/schweppes-lemon.jpg'),
-//     price: '$2.15',
-//     volume:'0.75 l'
-//   },
-//   {
-//     id: '27',
-//     type: 'drink',
-//     title: ' Chupa Chups Orange',
-//     image: require('../../assets/images/drinkScreen/chupaChups.jpg'),
-//     price: '$2.15',
-//     volume:'0.345 l'
-//   },
-//   // {
-//   //   id: '28',
-//   //   title: ' Chupa Chups Grape',
-//   //   image: require('../images/drinkScreen/chupaChup.jpg'),
-//   //   price: '$2.15',
-//   //   weight:'0.345 l'
-//   // },
-//   {
-//     id: '29',
-//     type: 'drink',
-//     title: ' Borjomi',
-//     image: require('../../assets/images/drinkScreen/borjomi.jpg'),
-//     price: '$2.15',
-//     volume:'0.5 l'
-//   },
-//   {
-//     id: '30',
-//     type: 'drink',
-//     title: ' Morshynska low carbonated',
-//     image: require('../../assets/images/drinkScreen/morshinskaya-slab-gaz.jpg'),
-//     price: '$2.15',
-//     volume:'0.75 l'
-//   },
-//   {
-//     id: '31',
-//     type: 'drink',
-//     title: ' Morshynska non-carbonated',
-//     image: require('../../assets/images/drinkScreen/morshinskay.jpg'),
-//     price: '$2.15',
-//     volume:'0.75 l'
-//   },
-
-
+export const mockDrinks = [
+  {
+    id: '23',
+    type: 'drink',
+    title: ' Pepsi',
+    image: require('../../assets/images/drinkScreen/pepsi.jpg'),
+    price: '$2.35',
+    volume:'1 l'
+  },
+  {
+    id: '24',
+    title: 'Redbull',
+    type: 'drink',
+    image: require('../../assets/images/drinkScreen/redbull.jpg'),
+    price: '$2.50',
+    volume:'0.5 l'
+  },
+  {
+    id: '25',
+    title: ' Schweppes tangerine',
+    type: 'drink',
+    image: require('../../assets/images/drinkScreen/schweppes.jpg'),
+    price: '$2.15',
+    volume:'0.33 l'
+  },
+  {
+    id: '26',
+    title: ' Schweppes lemon',
+    type: 'drink',
+    image: require('../../assets/images/drinkScreen/schweppes-lemon.jpg'),
+    price: '$2.15',
+    volume:'0.75 l'
+  },
+  {
+    id: '27',
+    type: 'drink',
+    title: ' Chupa Chups Orange',
+    image: require('../../assets/images/drinkScreen/chupaChups.jpg'),
+    price: '$2.15',
+    volume:'0.345 l'
+  },
+  {
+    id: '28',
+    title: ' Chupa Chups Grape',
+    image: require('../images/drinkScreen/chupaChup.jpg'),
+    price: '$2.15',
+    weight:'0.345 l'
+  },
+  {
+    id: '29',
+    type: 'drink',
+    title: ' Borjomi',
+    image: require('../../assets/images/drinkScreen/borjomi.jpg'),
+    price: '$2.15',
+    volume:'0.5 l'
+  },
+  {
+    id: '30',
+    type: 'drink',
+    title: ' Morshynska low carbonated',
+    image: require('../../assets/images/drinkScreen/morshinskaya-slab-gaz.jpg'),
+    price: '$2.15',
+    volume:'0.75 l'
+  },
+  {
+    id: '31',
+    type: 'drink',
+    title: ' Morshynska non-carbonated',
+    image: require('../../assets/images/drinkScreen/morshinskay.jpg'),
+    price: '$2.15',
+    volume:'0.75 l'
+  },
 
 
-// ]
+
+
+]

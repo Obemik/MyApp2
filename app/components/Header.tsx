@@ -4,23 +4,27 @@ import { colors } from "./Color";
 
 type HeaderProps = {
   onSearch: (text: string) => void;
+  totalItems?: number;
 };
+
 const categories = ["Pizza", "Sushi", "Burgers", "Lunch", "Sets", "Combo"];
-const Header = ({ onSearch }: HeaderProps) => {
+
+const Header = ({ onSearch, totalItems = 0 }: HeaderProps) => {
     const [searchText, setSearchText] = useState("");
     const [isSearchVisible, setIsSearchVisible] = useState(false);
     const [activeTab, setActiveTab] = useState("Pizza");
     const inputRef = useRef<TextInput>(null);
+    
     const handleSearch = (text: string) => {
         setSearchText(text);
         onSearch(text);
     }
+    
     const toggleSearch = () => {
         const next = !isSearchVisible;
         setIsSearchVisible(next);
         if (!next) {
             setTimeout(() => {
-
                 inputRef.current?.focus();
             }, 50);
         } else {
@@ -28,6 +32,7 @@ const Header = ({ onSearch }: HeaderProps) => {
             onSearch("");
         }
     }
+    
     return(
     <View style={styles.container}>
         <View style={styles.inner}>
@@ -35,21 +40,25 @@ const Header = ({ onSearch }: HeaderProps) => {
                 <View style={styles.logoRow}>
                     <Text style={styles.logo}>PRONTO</Text>
                     <Text style={styles.logoSub}>Pizza & Sushi</Text>
-
                 </View>
                 <View style={styles.actions}>
-                    <TouchableOpacity onPress={() => onSearch(searchText)}>
+                    <TouchableOpacity onPress={toggleSearch}>
                         <Image source={require("../../assets/images/header/icon-search.png")} style={styles.smallIcon} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => onSearch(searchText)}>
+                    <TouchableOpacity>
                         <Image source={require("../../assets/images/header/icon-like.png")} style={styles.smallIcon} />
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => onSearch(searchText)}>
+                    <TouchableOpacity style={styles.basketContainer}>
                         <Image source={require("../../assets/images/homeScreen/icon-basket.png")} style={styles.smallIcon} />
+                        {totalItems > 0 && (
+                            <View style={styles.badge}>
+                                <Text style={styles.badgeText}>{totalItems}</Text>
+                            </View>
+                        )}
                     </TouchableOpacity>
                 </View>
-
             </View>
+            
             {isSearchVisible && (
                 <View style={styles.searchRow}>
                     <Image source={require("../../assets/images/header/icon-search.png")} style={styles.searchIcon} />
@@ -60,10 +69,10 @@ const Header = ({ onSearch }: HeaderProps) => {
                         value={searchText}
                         onChangeText={handleSearch}
                         ref={inputRef}
-                        
                     />
                 </View>
             )}
+            
             <View style={styles.tabWrapper}>
                 <ScrollView horizontal contentContainerStyle={styles.tabRow}>
                 {categories.map((tab) => (
@@ -76,14 +85,12 @@ const Header = ({ onSearch }: HeaderProps) => {
                     </TouchableOpacity>
                 ))}
                 </ScrollView>
-
             </View>
-
         </View>
-
     </View>
     )
 }
+
 const styles = StyleSheet.create({
     container: {
         marginHorizontal: -16,
@@ -114,11 +121,32 @@ const styles = StyleSheet.create({
     actions: {
         flexDirection: "row",
         gap: 12,
+        alignItems: "center",
     },
     smallIcon: {
         width: 22,
         height: 22,
         tintColor: colors.title,
+    },
+    basketContainer: {
+        position: 'relative',
+    },
+    badge: {
+        position: 'absolute',
+        top: -6,
+        right: -6,
+        backgroundColor: colors.red,
+        borderRadius: 10,
+        minWidth: 18,
+        height: 18,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: 4,
+    },
+    badgeText: {
+        color: colors.white,
+        fontSize: 10,
+        fontWeight: '700',
     },
     searchRow: {
         flexDirection: "row",
@@ -157,7 +185,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: colors.borderMuted,
         backgroundColor: colors.tabs,
-
     },
     activeTab: {
         backgroundColor: colors.white,
@@ -171,4 +198,5 @@ const styles = StyleSheet.create({
         color: colors.black,
     },
 });
+
 export default Header;

@@ -7,10 +7,15 @@ import Animated, { useAnimatedScrollHandler, useSharedValue, useAnimatedStyle, i
 import { SafeAreaView } from "react-native-safe-area-context";
 import { mockItemData, type Item } from "../components/MockData";
 import ItemComponent from "../components/ItemList";
+import { useOrderStore } from "../store/index";
 
 export default function HomeScreen() {
   const [filteredData, setFilteredData] = useState(mockItemData);
   const scrollY = useSharedValue(0);
+  
+  const totalItems = useOrderStore((state) => 
+    state.orders.reduce((total, item) => total + (item.quantity || 0), 0)
+  );
 
   const scrollHandler = useAnimatedScrollHandler((event) => {
     scrollY.value = event.contentOffset.y;
@@ -50,7 +55,7 @@ export default function HomeScreen() {
     <LinearGradient colors={[colors.gradientStart, colors.gradientEnd]} style={styles.gradient}>
       <SafeAreaView style={styles.container}>
         <Animated.View style={[animatedTextStyle, styles.headerWrap]}>
-          <Header onSearch={onSearch} />
+          <Header onSearch={onSearch} totalItems={totalItems} />
         </Animated.View>
 
         <Animated.FlatList
